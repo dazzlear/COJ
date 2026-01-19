@@ -1,0 +1,348 @@
+﻿@model COJ.Models.HomeViewModel
+
+<style>
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* premium: subtle noise overlay */
+    .noise-bg {
+        position: relative;
+    }
+
+        .noise-bg::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: .08;
+            mix-blend-mode: overlay;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+            border-radius: inherit;
+        }
+
+    /* premium: glass edge + soft glow */
+    .glass-premium {
+        background: rgba(255,255,255,.06);
+        border: 1px solid rgba(255,255,255,.10);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+    }
+
+    /* premium: link underline animation */
+    .navlink {
+        position: relative;
+        display: inline-block;
+    }
+
+        .navlink::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 100%;
+            height: 2px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .35s ease;
+            background: linear-gradient(90deg, rgba(255,140,66,0), rgba(255,140,66,1), rgba(255,140,66,0));
+            opacity: .9;
+        }
+
+        .navlink:hover::after {
+            transform: scaleX(1);
+        }
+
+    /* premium: hero title glow */
+    .hero-glow {
+        text-shadow: 0 10px 40px rgba(0,0,0,.45);
+    }
+
+    /* premium: button shine */
+    .btn-shine {
+        position: relative;
+        overflow: hidden;
+    }
+
+        .btn-shine::before {
+            content: "";
+            position: absolute;
+            top: -40%;
+            left: -40%;
+            width: 60%;
+            height: 180%;
+            transform: rotate(25deg);
+            background: rgba(255,255,255,.20);
+            filter: blur(2px);
+            opacity: 0;
+            transition: all .6s ease;
+        }
+
+        .btn-shine:hover::before {
+            left: 120%;
+            opacity: 1;
+        }
+</style>
+
+<div x-data="{ scrolled: false, isMenuOpen: false }"
+     @@scroll.window="scrolled = (window.pageYOffset > 50)">
+
+    <!-- NAV -->
+    <nav :class="scrolled ? 'bg-[#1A2B4B]/92 backdrop-blur-md py-3 shadow-2xl border-b border-white/10' : 'bg-transparent py-6'"
+         class="fixed w-full z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="hidden md:flex items-center justify-between">
+                <div class="flex-1 flex justify-end space-x-10 pr-12">
+                    <a href="#home"
+                       :class="scrolled ? 'text-[#FDF9F3]' : 'text-white'"
+                       class="navlink text-[10px] font-black uppercase tracking-[0.25em] hover:text-[#FF8C42] transition-colors">
+                        Home
+                    </a>
+                    <a href="#band"
+                       :class="scrolled ? 'text-[#FDF9F3]' : 'text-white'"
+                       class="navlink text-[10px] font-black uppercase tracking-[0.25em] hover:text-[#FF8C42] transition-colors">
+                        The Band
+                    </a>
+                    <a href="#music"
+                       :class="scrolled ? 'text-[#FDF9F3]' : 'text-white'"
+                       class="navlink text-[10px] font-black uppercase tracking-[0.25em] hover:text-[#FF8C42] transition-colors">
+                        Music
+                    </a>
+                </div>
+
+                <a href="#home" class="flex items-center space-x-3 group cursor-pointer shrink-0">
+                    <div class="p-2 bg-[#FF8C42] rounded-lg rotate-3 group-hover:rotate-0 transition-transform duration-300 shadow-lg shadow-black/20">
+                        <i data-lucide="sparkles" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <span class="text-2xl font-black tracking-tighter uppercase text-white hero-glow">
+                        Cup of Joe
+                    </span>
+                </a>
+
+                <div class="flex-1 flex justify-start space-x-10 pl-12">
+                    <a href="#gallery"
+                       :class="scrolled ? 'text-[#FDF9F3]' : 'text-white'"
+                       class="navlink text-[10px] font-black uppercase tracking-[0.25em] hover:text-[#FF8C42] transition-colors">
+                        Gallery
+                    </a>
+                    <a href="#shows"
+                       :class="scrolled ? 'text-[#FDF9F3]' : 'text-white'"
+                       class="navlink text-[10px] font-black uppercase tracking-[0.25em] hover:text-[#FF8C42] transition-colors">
+                        Shows
+                    </a>
+                    <a href="#contact"
+                       :class="scrolled ? 'text-[#FDF9F3]' : 'text-white'"
+                       class="navlink text-[10px] font-black uppercase tracking-[0.25em] hover:text-[#FF8C42] transition-colors">
+                        Contact
+                    </a>
+                </div>
+            </div>
+
+            <!-- MOBILE NAV -->
+            <div class="flex md:hidden justify-between items-center">
+                <span class="text-2xl font-black tracking-tighter uppercase text-white hero-glow">Cup of Joe</span>
+                <button @@click="isMenuOpen = !isMenuOpen" class="text-white p-2 rounded-xl glass-premium">
+                    <i x-show="!isMenuOpen" data-lucide="menu"></i>
+                    <i x-show="isMenuOpen" data-lucide="x"></i>
+                </button>
+            </div>
+        </div>
+
+        <div x-show="isMenuOpen" x-cloak
+             x-transition.opacity.duration.250ms
+             class="fixed inset-0 bg-[#1A2B4B] z-40 flex flex-col items-center justify-center space-y-8 md:hidden">
+            <a href="#home" @@click="isMenuOpen = false" class="text-4xl font-black uppercase text-[#FDF9F3] hover:text-[#FF8C42] transition-colors">Home</a>
+            <a href="#band" @@click="isMenuOpen = false" class="text-4xl font-black uppercase text-[#FDF9F3] hover:text-[#FF8C42] transition-colors">The Band</a>
+            <a href="#music" @@click="isMenuOpen = false" class="text-4xl font-black uppercase text-[#FDF9F3] hover:text-[#FF8C42] transition-colors">Music</a>
+            <a href="#contact" @@click="isMenuOpen = false" class="text-4xl font-black uppercase text-[#FDF9F3] hover:text-[#FF8C42] transition-colors">Contact</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="home" class="relative h-screen flex items-center justify-center bg-[#1A2B4B] overflow-hidden noise-bg">
+        <div class="absolute inset-0 z-0">
+            <img src="~/img/cover.jpg" class="w-full h-full object-cover grayscale-[30%] opacity-60 scale-[1.03]" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#1A2B4B] via-black/10 to-[#1A2B4B]/55"></div>
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,140,66,0.18),transparent_55%)]"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+            <div class="max-w-2xl">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-premium text-white/90">
+                    <span class="w-2 h-2 rounded-full bg-[#FF8C42]"></span>
+                    <span class="text-[10px] font-black uppercase tracking-[0.25em]">OPM • Indie Pop • Live</span>
+                </div>
+
+                <h1 class="mt-6 text-6xl md:text-7xl font-black tracking-tighter text-white hero-glow leading-[0.92]">
+                    A warmer sound.<br /> A sharper stage.
+                </h1>
+
+                <p class="mt-6 text-white/85 text-lg md:text-xl max-w-xl">
+                    Discover the lineup, stream the discography, and catch upcoming shows — all in one premium hub.
+                </p>
+
+                <div class="mt-10 flex flex-wrap items-center gap-4">
+                    <a href="#music"
+                       class="btn-shine bg-[#FF8C42] text-white font-black uppercase tracking-[0.20em] text-[11px] px-8 py-4 rounded-2xl shadow-xl shadow-black/25 hover:brightness-110 transition-all">
+                        Listen Now
+                    </a>
+                    <a href="#shows"
+                       class="glass-premium text-white font-black uppercase tracking-[0.20em] text-[11px] px-8 py-4 rounded-2xl hover:border-white/20 transition-all">
+                        View Shows
+                    </a>
+
+                    <div class="hidden sm:flex items-center gap-4 pl-2">
+                        <div class="h-10 w-px bg-white/15"></div>
+                        <div class="flex items-center gap-3 text-white/80">
+                            <i data-lucide="map-pin" class="w-4 h-4"></i>
+                            <span class="text-xs font-bold uppercase tracking-widest">Philippines</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-14 grid grid-cols-3 gap-4 max-w-lg">
+                    <div class="glass-premium rounded-2xl p-5">
+                        <p class="text-[10px] font-black uppercase tracking-[0.25em] text-white/70">Releases</p>
+                        <p class="text-2xl font-black text-white mt-2">Discog</p>
+                    </div>
+                    <div class="glass-premium rounded-2xl p-5">
+                        <p class="text-[10px] font-black uppercase tracking-[0.25em] text-white/70">Shows</p>
+                        <p class="text-2xl font-black text-white mt-2">Live</p>
+                    </div>
+                    <div class="glass-premium rounded-2xl p-5">
+                        <p class="text-[10px] font-black uppercase tracking-[0.25em] text-white/70">Updates</p>
+                        <p class="text-2xl font-black text-white mt-2">Fresh</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="#band" class="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 glass-premium rounded-full px-5 py-3 text-white/80 hover:text-white transition-colors">
+            <span class="text-[10px] font-black uppercase tracking-[0.25em]">Scroll</span>
+        </a>
+    </section>
+
+    <!-- BAND -->
+    <section id="band" class="py-32 px-6 max-w-7xl mx-auto">
+        <div class="grid lg:grid-cols-12 gap-16 items-center">
+            <div class="lg:col-span-5 space-y-8">
+                <div class="space-y-3">
+                    <p class="text-[10px] font-black uppercase tracking-[0.25em] text-[#FF8C42]">THE BAND</p>
+                    <h2 class="text-6xl font-black tracking-tighter text-[#1A2B4B]">THE LINEUP.</h2>
+                    <p class="text-lg text-[#4B6584] max-w-md">
+                        Built on chemistry, tightened by live sets, polished by studio time.
+                    </p>
+                </div>
+
+                <div class="grid gap-4">
+                    @foreach (var member in Model.Members)
+                    {
+                        <div class="flex items-center gap-6 p-5 bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group hover:-translate-y-0.5">
+                            <div class="w-14 h-14 bg-[#1A2B4B] text-white rounded-2xl flex items-center justify-center font-black group-hover:bg-[#FF8C42] transition-colors shadow-md shadow-black/10">
+                                @member.Name[0]
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-lg font-black uppercase text-[#1A2B4B]">@member.Name</h4>
+                                <p class="text-xs font-bold text-[#FF8C42] uppercase tracking-widest">@member.Role</p>
+                            </div>
+                            <i data-lucide="arrow-up-right" class="w-5 h-5 text-[#1A2B4B]/30 group-hover:text-[#FF8C42] transition-colors"></i>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="lg:col-span-7">
+                <div class="rounded-[4rem] overflow-hidden border-[12px] border-white shadow-2xl relative">
+                    <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(255,140,66,0.18),transparent_55%)]"></div>
+                    <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=1200"
+                         class="w-full aspect-[4/5] object-cover" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MUSIC -->
+    <section id="music" class="py-32 bg-[#1A2B4B] text-white noise-bg">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-end justify-between gap-8 mb-16">
+                <div>
+                    <p class="text-[10px] font-black uppercase tracking-[0.25em] text-[#FF8C42]">DISCOGRAPHY</p>
+                    <h2 class="text-7xl font-black uppercase mt-3">Our Sounds.</h2>
+                </div>
+                <p class="hidden md:block text-white/70 max-w-md text-right">
+                    Tap any cover to spotlight the release — clean visuals, fast browsing, no clutter.
+                </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12">
+                @foreach (var album in Model.Discography)
+                {
+                    <div class="group cursor-pointer">
+                        <div class="aspect-square glass-premium rounded-[3rem] overflow-hidden mb-8 relative border border-white/10 group-hover:border-[#FF8C42]/70 transition-all duration-300 group-hover:-translate-y-1 shadow-xl shadow-black/20">
+                            <img src="@album.Cover" class="w-full h-full object-cover opacity-85 group-hover:opacity-100 transition-opacity duration-300" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div class="w-16 h-16 bg-[#FF8C42] rounded-full flex items-center justify-center shadow-xl shadow-black/30">
+                                    <i data-lucide="play" fill="currentColor"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="text-2xl font-black uppercase leading-tight">@album.Title</h3>
+                        <p class="text-xs font-bold text-[#FF8C42] uppercase mt-2 tracking-widest">@album.Type • @album.Year</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-32 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="bg-white rounded-[4rem] p-12 lg:p-24 flex flex-col lg:flex-row items-center gap-20 shadow-xl border border-gray-100">
+                <div class="lg:w-1/2 space-y-8">
+                    <p class="text-[10px] font-black uppercase tracking-[0.25em] text-[#FF8C42]">CONTACT</p>
+                    <h2 class="text-7xl font-black tracking-tighter leading-[0.9] text-[#1A2B4B]">
+                        LET'S <br /> CONNECT.
+                    </h2>
+                    <p class="text-2xl font-serif italic text-[#4B6584]">
+                        For bookings or a warm cup of coffee.
+                    </p>
+
+                    <div class="flex items-center gap-3 text-[#1A2B4B]/70">
+                        <i data-lucide="mail" class="w-5 h-5"></i>
+                        <span class="text-sm font-bold">hello@cupofjoe.com</span>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2 w-full bg-[#1A2B4B] rounded-[3.5rem] p-12 space-y-6 relative overflow-hidden noise-bg">
+                    <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(255,140,66,0.18),transparent_55%)]"></div>
+
+                    <div class="relative space-y-6">
+                        <div>
+                            <label class="block text-[10px] font-black uppercase tracking-[0.25em] text-white/70 mb-2">Full Name</label>
+                            <input type="text" placeholder="Your name"
+                                   class="w-full bg-white/5 border-2 border-white/10 p-5 focus:border-[#FF8C42] text-white rounded-2xl outline-none transition-colors" />
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] font-black uppercase tracking-[0.25em] text-white/70 mb-2">Email</label>
+                            <input type="email" placeholder="your@email.com"
+                                   class="w-full bg-white/5 border-2 border-white/10 p-5 focus:border-[#FF8C42] text-white rounded-2xl outline-none transition-colors" />
+                        </div>
+
+                        <button class="btn-shine w-full py-6 bg-[#FF8C42] text-white font-black uppercase rounded-2xl hover:bg-white hover:text-[#1A2B4B] transition-all shadow-xl shadow-black/25">
+                            Send Message
+                        </button>
+
+                        <p class="text-xs text-white/60 text-center">
+                            We typically reply within 24–48 hours.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</div>
