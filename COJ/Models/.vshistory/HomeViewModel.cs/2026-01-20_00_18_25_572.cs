@@ -7,5 +7,6 @@
     }
 
     public record BandMember(string Name, string Role, string ImagePath);
-    public record Album(string Title, string Type, string Year, string Cover, string Url);
+    public record Album(string Title, string Type, string Year, string Cover);
+    public record Show(string Date, string Venue, string Location, string Status);
 }

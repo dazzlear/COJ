@@ -20,9 +20,9 @@ public class HomeController : Controller
             Discography = new List<Album>
             {
                 new("Silakbo", "Album", "2025", "~/img/silakbo.jpg", "https://www.youtube.com/watch?v=r5eisDLrYeE"),
-                new("Sandali", "Single", "2025", "~/img/sandali.jpg", ""),
-                new("Misteryoso", "Single", "2024", "~/img/misteryoso.jpg", ""),
-                new("Lahat Ng Bukas", "Single", "2024", "~/img/lahatngbukas.jpg", "")
+                new("Sandali", "Single", "2025", "~/img/sandali.jpg"),
+                new("Misteryoso", "Single", "2024", "~/img/misteryoso.jpg"),
+                new("Lahat Ng Bukas", "Single", "2024", "~/img/lahatngbukas.jpg")
             }
         };
 

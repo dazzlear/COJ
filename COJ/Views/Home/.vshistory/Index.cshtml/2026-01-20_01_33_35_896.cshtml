@@ -191,110 +191,124 @@
     </section>
 
     <!-- SHOWS -->
-    <!-- SHOWS (layout like screenshot) -->
-    <section id="shows" class="py-28 md:py-32 bg-[#FFF7ED]">
+    <!-- SHOWS (revised layout + no circles/timeline) -->
+    <section id="shows" class="py-32 md:py-40 bg-[#FFF7ED] relative overflow-hidden">
+        <!-- subtle background accents -->
+        <div class="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-[#D97706]/10 blur-3xl"></div>
+        <div class="absolute -bottom-28 -left-28 w-96 h-96 rounded-full bg-[#0A1128]/10 blur-3xl"></div>
+
         <div class="max-w-screen-2xl mx-auto px-8">
-            <div class="grid lg:grid-cols-12 gap-12 items-start">
-                <!-- LEFT -->
-                <div class="lg:col-span-7">
+            <!-- TOP: poster strip + title -->
+            <div class="grid lg:grid-cols-12 gap-10 items-start mb-16">
+                <div class="lg:col-span-5">
                     <p class="text-[10px] font-black tracking-[0.8em] uppercase text-[#D97706]">Shows</p>
-                    <h3 class="mt-4 text-5xl md:text-6xl font-black tracking-tighter text-[#0A1128]">STARDUST TOUR</h3>
-                    <p class="mt-4 text-sm text-slate-600 max-w-xl">
-                        Official dates from the tour poster. Venues may update — especially for TBA listings.
+                    <h3 class="mt-4 text-5xl md:text-6xl font-black tracking-tighter text-[#0A1128]">
+                        STARDUST TOUR
+                    </h3>
+                    <p class="mt-6 text-sm text-slate-600 max-w-md">
+                        Official dates from the tour poster. Venues may update—especially for TBA listings.
                     </p>
 
-                    <!-- NEXT SHOW CARD -->
-                    <div class="mt-10 bg-white border border-black/5 shadow-[0_25px_70px_-45px_rgba(0,0,0,0.35)] p-7">
-                        <div class="flex items-start justify-between gap-6">
+                    <!-- mini highlight strip -->
+                    <div class="mt-10 p-6 bg-white border border-black/5 shadow-[0_25px_70px_-45px_rgba(0,0,0,0.35)]">
+                        <div class="flex items-center justify-between gap-6">
                             <div>
-                                <p class="text-[9px] font-black uppercase tracking-[0.4em] text-slate-400">Next Show</p>
-                                <h4 class="mt-3 text-2xl font-black text-[#0A1128]">Baguio</h4>
-                                <p class="mt-2 text-sm font-semibold text-slate-700">University of Baguio</p>
+                                <p class="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Next Show</p>
+                                <p class="mt-2 text-xl font-black tracking-tight text-[#0A1128]">Baguio</p>
+                                <p class="text-sm text-slate-600 font-semibold mt-1">University of Baguio</p>
                             </div>
-
-                            <!-- DATE ONLY (no pill) -->
                             <div class="text-right">
-                                <p class="text-[10px] font-black uppercase tracking-[0.4em] text-[#D97706]">
-                                    February 6, 2026
-                                </p>
-                                <div class="mt-4 h-px w-28 bg-[#0A1128]/10 ml-auto"></div>
+                                <p class="text-[10px] font-black uppercase tracking-[0.4em] text-[#D97706]">February 6, 2026</p>
+                                <div class="mt-3 h-px w-24 bg-[#0A1128]/10 ml-auto"></div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- TABLE -->
-                    <div class="mt-10 bg-white border border-black/5 shadow-[0_25px_70px_-45px_rgba(0,0,0,0.35)] overflow-hidden">
-                        <div class="grid grid-cols-12 px-6 py-4 bg-[#0A1128] text-white">
-                            <div class="col-span-4">
-                                <p class="text-[9px] font-black uppercase tracking-[0.4em] opacity-80">Date</p>
-                            </div>
-                            <div class="col-span-8">
-                                <p class="text-[9px] font-black uppercase tracking-[0.4em] opacity-80">City & Venue</p>
-                            </div>
-                        </div>
-
-                        <!-- ROWS -->
-                        <div class="grid grid-cols-12 px-6 py-6 border-t border-black/5">
-                            <div class="col-span-4">
-                                <p class="text-[10px] font-black uppercase tracking-[0.4em] text-[#D97706]">March 28, 2026</p>
-                            </div>
-                            <div class="col-span-8">
-                                <p class="text-[9px] font-black uppercase tracking-[0.35em] text-slate-400">Cebu</p>
-                                <p class="mt-2 text-lg font-black text-[#0A1128]">Waterfront Cebu City Hotel & Casino, Lahug</p>
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-12 px-6 py-6 border-t border-black/5">
-                            <div class="col-span-4">
-                                <p class="text-[10px] font-black uppercase tracking-[0.4em] text-[#D97706]">May 2, 2026</p>
-                            </div>
-                            <div class="col-span-8">
-                                <p class="text-[9px] font-black uppercase tracking-[0.35em] text-slate-400">Iloilo</p>
-                                <p class="mt-2 text-lg font-black text-[#0A1128]">TBA</p>
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-12 px-6 py-6 border-t border-black/5">
-                            <div class="col-span-4">
-                                <p class="text-[10px] font-black uppercase tracking-[0.4em] text-[#D97706]">May 30, 2026</p>
-                            </div>
-                            <div class="col-span-8">
-                                <p class="text-[9px] font-black uppercase tracking-[0.35em] text-slate-400">Davao</p>
-                                <p class="mt-2 text-lg font-black text-[#0A1128]">SMX Convention Center</p>
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-12 px-6 py-6 border-t border-black/5">
-                            <div class="col-span-4">
-                                <p class="text-[10px] font-black uppercase tracking-[0.4em] text-[#D97706]">June 13, 2026</p>
-                            </div>
-                            <div class="col-span-8">
-                                <p class="text-[9px] font-black uppercase tracking-[0.35em] text-slate-400">Cagayan de Oro</p>
-                                <p class="mt-2 text-lg font-black text-[#0A1128]">Limketkai Atrium</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <p class="mt-6 text-[9px] font-bold uppercase tracking-[0.45em] text-slate-500">
-                        Subject to updates
-                    </p>
                 </div>
 
-                <!-- RIGHT (poster) -->
-                <div class="lg:col-span-5 lg:pt-10">
-                    <div class="bg-[#0A1128] p-4 shadow-[0_55px_140px_-70px_rgba(0,0,0,0.65)] border border-black/10">
+                <!-- poster (wide, premium) -->
+                <div class="lg:col-span-7">
+                    <div class="bg-[#0A1128] p-3 shadow-[0_55px_140px_-70px_rgba(0,0,0,0.65)] border border-black/10">
                         <img src="~/img/stardust-tour.jpg" asp-append-version="true"
                              alt="Stardust Tour Poster"
-                             class="w-full h-auto object-contain"
-                             style="image-rendering:auto;" />
+                             class="w-full h-[320px] md:h-[380px] object-cover" />
                     </div>
                 </div>
             </div>
+
+            <!-- LIST: table-like cards (date on left, details on right) -->
+            <div class="bg-white border border-black/5 shadow-[0_25px_70px_-45px_rgba(0,0,0,0.35)] overflow-hidden">
+                <!-- header row -->
+                <div class="grid grid-cols-12 gap-4 px-6 py-4 bg-[#0A1128] text-white">
+                    <div class="col-span-4 md:col-span-3">
+                        <p class="text-[9px] font-black uppercase tracking-[0.4em] opacity-70">Date</p>
+                    </div>
+                    <div class="col-span-8 md:col-span-9">
+                        <p class="text-[9px] font-black uppercase tracking-[0.4em] opacity-70">City & Venue</p>
+                    </div>
+                </div>
+
+                <!-- row item -->
+                <div class="grid grid-cols-12 gap-4 px-6 py-6 border-t border-black/5 hover:bg-[#FFF7ED] transition-colors">
+                    <div class="col-span-4 md:col-span-3">
+                        <p class="text-[10px] font-black uppercase tracking-[0.4em] text-[#D97706]">February 6, 2026</p>
+                    </div>
+                    <div class="col-span-8 md:col-span-9">
+                        <p class="text-[10px] font text-slate-400 font-black uppercase tracking-[0.4em]">Baguio</p>
+                        <h4 class="mt-2 text-2xl font-black tracking-tight text-[#0A1128]">University of Baguio</h4>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-12 gap-4 px-6 py-6 border-t border-black/5 hover:bg-[#FFF7ED] transition-colors">
+                    <div class="col-span-4 md:col-span-3">
+                        <p class="text-[10px] font-black uppercase tracking-[0.4em] text-[#D97706]">March 28, 2026</p>
+                    </div>
+                    <div class="col-span-8 md:col-span-9">
+                        <p class="text-[10px] text-slate-400 font-black uppercase tracking-[0.4em]">Cebu</p>
+                        <h4 class="mt-2 text-2xl font-black tracking-tight text-[#0A1128]">Waterfront Cebu City Hotel & Casino, Lahug</h4>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-12 gap-4 px-6 py-6 border-t border-black/5 hover:bg-[#FFF7ED] transition-colors">
+                    <div class="col-span-4 md:col-span-3">
+                        <p class="text-[10px] font-black uppercase tracking-[0.4em] text-[#D97706]">May 2, 2026</p>
+                    </div>
+                    <div class="col-span-8 md:col-span-9">
+                        <p class="text-[10px] text-slate-400 font-black uppercase tracking-[0.4em]">Iloilo</p>
+                        <h4 class="mt-2 text-2xl font-black tracking-tight text-[#0A1128]">TBA</h4>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-12 gap-4 px-6 py-6 border-t border-black/5 hover:bg-[#FFF7ED] transition-colors">
+                    <div class="col-span-4 md:col-span-3">
+                        <p class="text-[10px] font-black uppercase tracking-[0.4em] text-[#D97706]">May 30, 2026</p>
+                    </div>
+                    <div class="col-span-8 md:col-span-9">
+                        <p class="text-[10px] text-slate-400 font-black uppercase tracking-[0.4em]">Davao</p>
+                        <h4 class="mt-2 text-2xl font-black tracking-tight text-[#0A1128]">SMX Convention Center</h4>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-12 gap-4 px-6 py-6 border-t border-black/5 hover:bg-[#FFF7ED] transition-colors">
+                    <div class="col-span-4 md:col-span-3">
+                        <p class="text-[10px] font-black uppercase tracking-[0.4em] text-[#D97706]">June 13, 2026</p>
+                    </div>
+                    <div class="col-span-8 md:col-span-9">
+                        <p class="text-[10px] text-slate-400 font-black uppercase tracking-[0.4em]">Cagayan de Oro</p>
+                        <h4 class="mt-2 text-2xl font-black tracking-tight text-[#0A1128]">Limketkai Atrium</h4>
+                    </div>
+                </div>
+            </div>
+
+            <!-- footer note -->
+            <p class="mt-10 text-[10px] font-bold uppercase tracking-[0.45em] text-slate-500">
+                Dates are based on the poster • subject to updates
+            </p>
         </div>
     </section>
 
 
-    <!-- CONTACT -->
+
+
     <section id="contact" class="py-28 bg-[#0A1128] relative overflow-hidden">
         <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[520px] h-[520px] rounded-full bg-[#D97706]/10 blur-3xl"></div>
 
