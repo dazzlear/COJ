@@ -4,6 +4,8 @@
      @@scroll.window="scrolled = (window.pageYOffset > 50)"
      class="selection:bg-[#D97706] selection:text-white bg-[#FDF9F3] text-[#0A1128]">
 
+
+    <!-- NAV (headings) -->
     <nav :class="scrolled ? 'bg-[#0A1128]/95 backdrop-blur-xl py-4 shadow-2xl border-b border-white/5' : 'bg-transparent py-10'"
          class="fixed w-full z-50 transition-all duration-700 ease-in-out">
         <div class="max-w-screen-2xl mx-auto px-8 md:px-12">
@@ -82,6 +84,7 @@
         </div>
     </nav>
 
+    <!-- HOME -->
     <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden bg-[#0A1128]">
         <div class="absolute inset-0 z-0">
             <img src="~/img/cover.png" asp-append-version="true"
@@ -105,13 +108,25 @@
         </div>
     </section>
 
-    <section id="band" class="py-40 bg-[#FDF9F3]">
-        <div class="max-w-screen-2xl mx-auto px-8">
-            <div class="text-center mb-24">
-                <h2 class="text-[10px] font-black tracking-[0.8em] uppercase text-[#D97706] mb-4">Our Fav OT5</h2>
+    <!-- BAND -->
+    <section id="band" class="relative py-28 md:py-32 bg-[#FDF9F3] overflow-hidden">
+        <!-- animated background layers  -->
+        <div class="absolute inset-0 pointer-events-none band-aurora"></div>
+        <div class="absolute inset-0 pointer-events-none band-grid-drift"></div>
+        <div class="absolute inset-0 pointer-events-none band-sweep"></div>
+
+        <!-- soft watermark -->
+        <div class="absolute inset-x-0 top-16 pointer-events-none select-none band-watermark">
+            <p class="text-center font-black uppercase">Cup of Joe</p>
+        </div>
+
+        <div class="relative z-10 max-w-screen-2xl mx-auto px-8">
+            <div class="text-center mb-16 md:mb-20">
+                <h2 class="text-[10px] font-black tracking-[0.8em] uppercase text-[#D97706] mb-4">Our Favorite OT5</h2>
                 <h3 class="text-6xl font-black tracking-tighter text-[#0A1128]">MEET THE BAND</h3>
             </div>
 
+            <!-- your grid stays the same -->
             <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-10">
                 @{
                     var index = 0;
@@ -148,24 +163,36 @@
         </div>
     </section>
 
-    <section id="music" class="py-40 bg-[#0A1128] text-white overflow-hidden">
+
+    <!-- MUSIC -->
+    <section id="music" class="py-28 md:py-32 bg-[#0A1128] text-white overflow-hidden">
         <div class="max-w-screen-2xl mx-auto px-8">
-            <div class="flex justify-between items-end mb-24">
-                <h3 class="text-6xl font-black tracking-tighter uppercase">Our Sounds.</h3>
+
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-10 mb-12 md:mb-14">
+                <div>
+                    <p class="text-[10px] font-black tracking-[0.8em] uppercase text-[#D97706]">Music</p>
+                    <h3 class="mt-4 text-5xl md:text-6xl font-black tracking-tighter uppercase">Discography</h3>
+                    <p class="mt-4 text-sm text-white/55 max-w-2xl">
+                        Stream Cup of Joe on official platforms.
+                    </p>
+                </div>
+
                 <div class="hidden md:block w-32 h-px bg-[#D97706] opacity-70"></div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+            <!-- ALBUM GRID -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
                 @foreach (var album in Model.Discography)
                 {
-                    <div class="group cursor-pointer">
-                        <div class="relative aspect-square bg-white/5 overflow-hidden mb-8 shadow-2xl border border-white/10 group-hover:border-[#D97706]/50
-                                            transition-all duration-700 group-hover:-translate-y-3">
+                    <a href="@album.Url" target="_blank" rel="noopener noreferrer" class="group block cursor-pointer">
+                        <div class="relative aspect-square bg-white/5 overflow-hidden mb-7 shadow-2xl border border-white/10 group-hover:border-[#D97706]/50
+                                    transition-all duration-700 group-hover:-translate-y-3">
 
                             <img src="@Url.Content(album.Cover)"
                                  class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-all duration-700" />
 
-                            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(circle_at_30%_25%,rgba(255,255,255,0.22),transparent_55%)]"></div>
+                            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700
+                                        bg-[radial-gradient(circle_at_30%_25%,rgba(255,255,255,0.22),transparent_55%)]"></div>
                             <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent opacity-60"></div>
 
                             <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -175,141 +202,156 @@
                             </div>
                         </div>
 
-                        <h3 class="text-xl font-bold uppercase tracking-tight">@album.Title</h3>
+                        <h3 class="text-xl font-bold uppercase tracking-tight transition-colors group-hover:text-[#D97706]">@album.Title</h3>
                         <p class="text-[10px] font-bold text-[#D97706] uppercase tracking-widest mt-2">@album.Type • @album.Year</p>
-                    </div>
+                    </a>
                 }
             </div>
+
+            <!-- STREAMING PLATFORMS -->
+            <div x-data="{ morePlatforms: false }" class="mt-12">
+                <div class="flex flex-col items-center text-center">
+                    <p class="text-[9px] font-black uppercase tracking-[0.45em] text-white/45">Listen on</p>
+
+                    <div class="mt-4 flex flex-wrap justify-center gap-3">
+                        <a href="https://open.spotify.com/artist/61nn6nOoLWjVC1ER2qFAvN" target="_blank" rel="noopener" class="platform-chip">
+                            <i data-lucide="music" class="w-4 h-4"></i><span>Spotify</span>
+                        </a>
+                        <a href="https://music.apple.com/ph/artist/cup-of-joe/1470488556" target="_blank" rel="noopener" class="platform-chip">
+                            <i data-lucide="disc-3" class="w-4 h-4"></i><span>Apple Music</span>
+                        </a>
+                        <a href="https://music.youtube.com/channel/UCPq0kgKjpNzryoNbRp5eUyQ" target="_blank" rel="noopener" class="platform-chip">
+                            <i data-lucide="youtube" class="w-4 h-4"></i><span>YouTube Music</span>
+                        </a>
+                    </div>
+
+                    <button type="button"
+                            @@click="morePlatforms = !morePlatforms"
+                            class="mt-5 inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.4em] text-[#D97706] hover:text-[#f59e0b] transition-colors">
+                        <span x-text="morePlatforms ? 'Less' : 'More'"></span>
+                        <i data-lucide="chevron-down"
+                           class="w-4 h-4 transition-transform duration-300"
+                           :class="morePlatforms ? 'rotate-180' : ''"></i>
+                    </button>
+
+                    <div x-show="morePlatforms" x-collapse class="mt-6">
+                        <div class="flex flex-wrap justify-center gap-3">
+                            <a href="https://www.deezer.com/en/artist/60687062" target="_blank" rel="noopener" class="platform-chip">
+                                <i data-lucide="radio" class="w-4 h-4"></i><span>Deezer</span>
+                            </a>
+                            <a href="https://music.amazon.com/artists/B07P8BH48D/cup-of-joe" target="_blank" rel="noopener" class="platform-chip">
+                                <i data-lucide="headphones" class="w-4 h-4"></i><span>Amazon Music</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <section id="shows" class="py-36 bg-[#FFF7ED] relative overflow-hidden">
-        <div class="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-[#D97706]/10 blur-3xl"></div>
-        <div class="absolute -bottom-28 -left-28 w-96 h-96 rounded-full bg-[#0A1128]/10 blur-3xl"></div>
-
+    <!-- SHOWS -->
+    <section id="shows" class="py-28 md:py-32 bg-[#FFF7ED]">
         <div class="max-w-screen-2xl mx-auto px-8">
-            <div class="flex flex-col lg:flex-row gap-14 items-start">
-                <div class="w-full lg:w-[420px] lg:sticky lg:top-28">
-                    <div class="mb-10">
-                        <p class="text-[10px] font-black tracking-[0.8em] uppercase text-[#D97706]">Upcoming</p>
-                        <h3 class="mt-4 text-6xl font-black tracking-tighter text-[#0A1128]">STARDUST TOUR</h3>
-                        <p class="mt-5 text-sm text-slate-600 max-w-sm">
-                            Official dates from the tour poster. Venues may update—especially for TBA listings.
-                        </p>
+            <div class="grid lg:grid-cols-12 gap-10 items-start">
+
+                <div class="lg:col-span-7">
+                    <p class="text-[10px] font-black tracking-[0.8em] uppercase text-[#D97706]">Shows</p>
+                    <h3 class="mt-4 text-5xl md:text-6xl font-black tracking-tighter text-[#0A1128]">STARDUST TOUR</h3>
+                    <p class="mt-4 text-sm text-slate-600 max-w-xl">
+                        Official dates from the tour poster. Venues may update — especially for TBA listings.
+                    </p>
+
+                    <div class="mt-8 bg-white border border-black/5 shadow-[0_25px_70px_-45px_rgba(0,0,0,0.35)] p-7">
+                        <div class="flex items-start justify-between gap-6">
+                            <div>
+                                <p class="text-[9px] font-black uppercase tracking-[0.4em] text-slate-400">Next Show</p>
+                                <h4 class="mt-3 text-2xl font-black text-[#0A1128]">Baguio</h4>
+                                <p class="mt-2 text-sm font-semibold text-slate-700">University of Baguio</p>
+                            </div>
+
+                            <div class="text-right">
+                                <p class="text-[10px] font-black uppercase tracking-[0.4em] text-[#D97706]">
+                                    February 6, 2026
+                                </p>
+                                <div class="mt-4 h-px w-28 bg-[#0A1128]/10 ml-auto"></div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="bg-[#0A1128] p-3 shadow-[0_50px_120px_-60px_rgba(0,0,0,0.55)] border border-black/10">
-                        <img src="~/img/stardust-tour.jpg" asp-append-version="true"
+                    <div class="mt-8 bg-white border border-black/5 shadow-[0_25px_70px_-45px_rgba(0,0,0,0.35)] overflow-hidden">
+                        <div class="grid grid-cols-12 px-6 py-4 bg-[#0A1128] text-white">
+                            <div class="col-span-4">
+                                <p class="text-[9px] font-black uppercase tracking-[0.4em] opacity-80">Date</p>
+                            </div>
+                            <div class="col-span-8">
+                                <p class="text-[9px] font-black uppercase tracking-[0.4em] opacity-80">City & Venue</p>
+                            </div>
+                        </div>
+
+                        <!-- slightly tighter rows -->
+                        <div class="grid grid-cols-12 px-6 py-5 border-t border-black/5">
+                            <div class="col-span-4">
+                                <p class="text-[10px] font-black uppercase tracking-[0.4em] text-[#D97706]">March 28, 2026</p>
+                            </div>
+                            <div class="col-span-8">
+                                <p class="text-[9px] font-black uppercase tracking-[0.35em] text-slate-400">Cebu</p>
+                                <p class="mt-2 text-lg font-black text-[#0A1128]">Waterfront Cebu City Hotel & Casino, Lahug</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-12 px-6 py-5 border-t border-black/5">
+                            <div class="col-span-4">
+                                <p class="text-[10px] font-black uppercase tracking-[0.4em] text-[#D97706]">May 9, 2026</p>
+                            </div>
+                            <div class="col-span-8">
+                                <p class="text-[9px] font-black uppercase tracking-[0.35em] text-slate-400">Iloilo</p>
+                                <p class="mt-2 text-lg font-black text-[#0A1128]">Iloilo Convention Center</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-12 px-6 py-5 border-t border-black/5">
+                            <div class="col-span-4">
+                                <p class="text-[10px] font-black uppercase tracking-[0.4em] text-[#D97706]">May 30, 2026</p>
+                            </div>
+                            <div class="col-span-8">
+                                <p class="text-[9px] font-black uppercase tracking-[0.35em] text-slate-400">Davao</p>
+                                <p class="mt-2 text-lg font-black text-[#0A1128]">SMX Convention Center</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-12 px-6 py-5 border-t border-black/5">
+                            <div class="col-span-4">
+                                <p class="text-[10px] font-black uppercase tracking-[0.4em] text-[#D97706]">June 13, 2026</p>
+                            </div>
+                            <div class="col-span-8">
+                                <p class="text-[9px] font-black uppercase tracking-[0.35em] text-slate-400">Cagayan de Oro</p>
+                                <p class="mt-2 text-lg font-black text-[#0A1128]">Limketkai Atrium</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="mt-6 text-[9px] font-bold uppercase tracking-[0.45em] text-slate-500">
+                        Subject to updates
+                    </p>
+                </div>
+
+                <div class="lg:col-span-5 lg:pt-8">
+                    <div class="bg-[#0A1128] p-4 shadow-[0_55px_140px_-70px_rgba(0,0,0,0.65)] border border-black/10">
+                        <img src="~/img/stardust-tour2.jpg" asp-append-version="true"
                              alt="Stardust Tour Poster"
-                             class="w-full h-auto object-cover" />
+                             class="w-full h-auto object-contain"
+                             style="image-rendering:auto;" />
                     </div>
                 </div>
 
-                <div class="flex-1 w-full">
-                    <div class="relative pl-8">
-                        <div class="absolute left-3 top-2 bottom-2 w-px bg-[#0A1128]/10"></div>
-
-                        <div class="relative mb-7">
-                            <div class="absolute left-0 top-6 w-6 h-6 rounded-full bg-[#D97706] shadow-[0_15px_40px_-15px_rgba(217,119,6,0.8)]"></div>
-                            <div class="bg-white border border-black/5 shadow-[0_25px_70px_-45px_rgba(0,0,0,0.35)] p-7">
-                                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
-                                    <div>
-                                        <p class="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Baguio</p>
-                                        <h4 class="text-2xl font-black text-[#0A1128] mt-2">University of Baguio</h4>
-                                        <p class="text-sm text-slate-600 mt-3">CNCA • Cup of Joe’s Stardust</p>
-                                    </div>
-                                    <div class="md:text-right">
-                                        <p class="text-[10px] font-black uppercase tracking-[0.4em] text-[#D97706]">February 6, 2026</p>
-                                        <div class="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0A1128] text-white text-[10px] font-bold uppercase tracking-[0.25em]">
-                                            <i data-lucide="ticket" class="w-4 h-4"></i> Upcoming
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="relative mb-7">
-                            <div class="absolute left-0 top-6 w-6 h-6 rounded-full bg-[#0A1128]"></div>
-                            <div class="bg-white border border-black/5 shadow-[0_25px_70px_-45px_rgba(0,0,0,0.35)] p-7">
-                                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
-                                    <div>
-                                        <p class="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Cebu</p>
-                                        <h4 class="text-2xl font-black text-[#0A1128] mt-2">Waterfront Cebu City Hotel & Casino, Lahug</h4>
-                                        <p class="text-sm text-slate-600 mt-3">CNCA • Cup of Joe’s Stardust</p>
-                                    </div>
-                                    <div class="md:text-right">
-                                        <p class="text-[10px] font-black uppercase tracking-[0.4em] text-[#D97706]">March 28, 2026</p>
-                                        <div class="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0A1128] text-white text-[10px] font-bold uppercase tracking-[0.25em]">
-                                            <i data-lucide="map-pin" class="w-4 h-4"></i> Venue
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="relative mb-7">
-                            <div class="absolute left-0 top-6 w-6 h-6 rounded-full bg-[#0A1128]"></div>
-                            <div class="bg-white border border-black/5 shadow-[0_25px_70px_-45px_rgba(0,0,0,0.35)] p-7">
-                                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
-                                    <div>
-                                        <p class="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Iloilo</p>
-                                        <h4 class="text-2xl font-black text-[#0A1128] mt-2">TBA</h4>
-                                        <p class="text-sm text-slate-600 mt-3">CNCA • Cup of Joe’s Stardust</p>
-                                    </div>
-                                    <div class="md:text-right">
-                                        <p class="text-[10px] font-black uppercase tracking-[0.4em] text-[#D97706]">May 2, 2026</p>
-                                        <div class="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0A1128] text-white text-[10px] font-bold uppercase tracking-[0.25em]">
-                                            <i data-lucide="info" class="w-4 h-4"></i> Details Soon
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="relative mb-7">
-                            <div class="absolute left-0 top-6 w-6 h-6 rounded-full bg-[#0A1128]"></div>
-                            <div class="bg-white border border-black/5 shadow-[0_25px_70px_-45px_rgba(0,0,0,0.35)] p-7">
-                                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
-                                    <div>
-                                        <p class="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Davao</p>
-                                        <h4 class="text-2xl font-black text-[#0A1128] mt-2">SMX Convention Center</h4>
-                                        <p class="text-sm text-slate-600 mt-3">CNCA • Cup of Joe’s Stardust</p>
-                                    </div>
-                                    <div class="md:text-right">
-                                        <p class="text-[10px] font-black uppercase tracking-[0.4em] text-[#D97706]">May 30, 2026</p>
-                                        <div class="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0A1128] text-white text-[10px] font-bold uppercase tracking-[0.25em]">
-                                            <i data-lucide="calendar" class="w-4 h-4"></i> Date
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="relative">
-                            <div class="absolute left-0 top-6 w-6 h-6 rounded-full bg-[#0A1128]"></div>
-                            <div class="bg-white border border-black/5 shadow-[0_25px_70px_-45px_rgba(0,0,0,0.35)] p-7">
-                                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
-                                    <div>
-                                        <p class="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Cagayan de Oro</p>
-                                        <h4 class="text-2xl font-black text-[#0A1128] mt-2">Limketkai Atrium</h4>
-                                        <p class="text-sm text-slate-600 mt-3">CNCA • Cup of Joe’s Stardust</p>
-                                    </div>
-                                    <div class="md:text-right">
-                                        <p class="text-[10px] font-black uppercase tracking-[0.4em] text-[#D97706]">June 13, 2026</p>
-                                        <div class="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0A1128] text-white text-[10px] font-bold uppercase tracking-[0.25em]">
-                                            <i data-lucide="sparkles" class="w-4 h-4"></i> Finale
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
             </div>
         </div>
     </section>
 
+
+
+    <!-- CONTACT -->
     <section id="contact" class="py-28 bg-[#0A1128] relative overflow-hidden">
         <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[520px] h-[520px] rounded-full bg-[#D97706]/10 blur-3xl"></div>
 
@@ -334,7 +376,7 @@
                                 <input type="text" placeholder="NAME" class="form-input" />
                                 <input type="email" placeholder="EMAIL" class="form-input" />
                             </div>
-                            <textarea rows="3" placeholder="YOUR MESSAGE" class="form-input resize-none"></textarea>
+                            <textarea rows="3" placeholder="MESSAGE" class="form-input resize-none"></textarea>
                             <button class="relative overflow-hidden group bg-[#0A1128] text-white px-10 py-4 text-[10px] font-bold uppercase tracking-[0.4em] shadow-2xl">
                                 <span class="relative z-10">Send Inquiry</span>
                                 <div class="absolute inset-0 bg-[#D97706] translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
@@ -346,6 +388,7 @@
             </div>
         </div>
     </section>
+
 
     <style>
         /* --- ORANGE SCROLLBAR --- */
@@ -473,6 +516,31 @@
             }
         }
 
+        /* --- BAND BACKGROUND*/
+        .band-paper {
+            background-image: linear-gradient(115deg, rgba(217,119,6,0.10), transparent 55%), linear-gradient(245deg, rgba(10,17,40,0.08), transparent 60%), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.20'/%3E%3C/svg%3E");
+            background-size: cover, cover, 180px 180px;
+            background-repeat: no-repeat, no-repeat, repeat;
+            opacity: 0.9;
+            mix-blend-mode: multiply;
+        }
+
+        .band-grid {
+            /* faint grid for “premium tech” feel */
+            background-image: linear-gradient(to right, rgba(10,17,40,0.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(10,17,40,0.10) 1px, transparent 1px);
+            background-size: 72px 72px;
+            opacity: 0.06;
+        }
+
+        /* watermark text */
+        .band-watermark p {
+            font-size: clamp(56px, 9vw, 150px);
+            letter-spacing: -0.06em;
+            color: rgba(10,17,40,0.045);
+            transform: translateY(0);
+        }
+
+
         /* --- MUSIC play pulse --- */
         .play-pulse::before {
             content: "";
@@ -551,5 +619,44 @@
                 transform: translateY(-4px);
                 box-shadow: 0 18px 35px -18px rgba(217,119,6,0.35);
             }
+
+        .platform-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 9999px;
+            border: 1px solid rgba(255,255,255,.12);
+            background: rgba(255,255,255,.04);
+            color: rgba(255,255,255,.92);
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            transition: all .55s cubic-bezier(.2,.8,.2,1);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .platform-chip::after {
+                content: "";
+                position: absolute;
+                inset: -20px;
+                background: radial-gradient(circle at 30% 30%, rgba(217,119,6,.35), transparent 55%);
+                opacity: 0;
+                transition: opacity .55s ease;
+            }
+
+            .platform-chip:hover {
+                border-color: #D97706;
+                color: #D97706;
+                transform: translateY(-4px);
+                box-shadow: 0 18px 35px -18px rgba(217,119,6,0.35);
+            }
+
+                .platform-chip:hover::after {
+                    opacity: .9;
+                }
+
     </style>
 </div>

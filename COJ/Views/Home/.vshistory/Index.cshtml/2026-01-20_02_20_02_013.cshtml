@@ -109,24 +109,23 @@
     </section>
 
     <!-- BAND -->
-    <section id="band" class="relative py-28 md:py-32 bg-[#FDF9F3] overflow-hidden">
+    <section id="band" class="relative py-40 bg-[#FDF9F3] overflow-hidden">
         <!-- animated background layers  -->
         <div class="absolute inset-0 pointer-events-none band-aurora"></div>
         <div class="absolute inset-0 pointer-events-none band-grid-drift"></div>
         <div class="absolute inset-0 pointer-events-none band-sweep"></div>
 
         <!-- soft watermark -->
-        <div class="absolute inset-x-0 top-16 pointer-events-none select-none band-watermark">
+        <div class="absolute inset-x-0 top-24 pointer-events-none select-none band-watermark">
             <p class="text-center font-black uppercase">Cup of Joe</p>
         </div>
 
         <div class="relative z-10 max-w-screen-2xl mx-auto px-8">
-            <div class="text-center mb-16 md:mb-20">
+            <div class="text-center mb-24">
                 <h2 class="text-[10px] font-black tracking-[0.8em] uppercase text-[#D97706] mb-4">Our Favorite OT5</h2>
                 <h3 class="text-6xl font-black tracking-tighter text-[#0A1128]">MEET THE BAND</h3>
             </div>
 
-            <!-- your grid stays the same -->
             <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-10">
                 @{
                     var index = 0;
@@ -165,10 +164,10 @@
 
 
     <!-- MUSIC -->
-    <section id="music" class="py-28 md:py-32 bg-[#0A1128] text-white overflow-hidden">
+    <section id="music" class="py-40 bg-[#0A1128] text-white overflow-hidden">
         <div class="max-w-screen-2xl mx-auto px-8">
 
-            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-10 mb-12 md:mb-14">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-10 mb-16">
                 <div>
                     <p class="text-[10px] font-black tracking-[0.8em] uppercase text-[#D97706]">Music</p>
                     <h3 class="mt-4 text-5xl md:text-6xl font-black tracking-tighter uppercase">Discography</h3>
@@ -181,11 +180,11 @@
             </div>
 
             <!-- ALBUM GRID -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
                 @foreach (var album in Model.Discography)
                 {
                     <a href="@album.Url" target="_blank" rel="noopener noreferrer" class="group block cursor-pointer">
-                        <div class="relative aspect-square bg-white/5 overflow-hidden mb-7 shadow-2xl border border-white/10 group-hover:border-[#D97706]/50
+                        <div class="relative aspect-square bg-white/5 overflow-hidden mb-8 shadow-2xl border border-white/10 group-hover:border-[#D97706]/50
                                     transition-all duration-700 group-hover:-translate-y-3">
 
                             <img src="@Url.Content(album.Cover)"
@@ -209,19 +208,24 @@
             </div>
 
             <!-- STREAMING PLATFORMS -->
-            <div x-data="{ morePlatforms: false }" class="mt-12">
+            <div x-data="{ morePlatforms: false }" class="mt-16">
                 <div class="flex flex-col items-center text-center">
                     <p class="text-[9px] font-black uppercase tracking-[0.45em] text-white/45">Listen on</p>
 
                     <div class="mt-4 flex flex-wrap justify-center gap-3">
                         <a href="https://open.spotify.com/artist/61nn6nOoLWjVC1ER2qFAvN" target="_blank" rel="noopener" class="platform-chip">
-                            <i data-lucide="music" class="w-4 h-4"></i><span>Spotify</span>
+                            <i data-lucide="music" class="w-4 h-4"></i>
+                            <span>Spotify</span>
                         </a>
+
                         <a href="https://music.apple.com/ph/artist/cup-of-joe/1470488556" target="_blank" rel="noopener" class="platform-chip">
-                            <i data-lucide="disc-3" class="w-4 h-4"></i><span>Apple Music</span>
+                            <i data-lucide="disc-3" class="w-4 h-4"></i>
+                            <span>Apple Music</span>
                         </a>
+
                         <a href="https://music.youtube.com/channel/UCPq0kgKjpNzryoNbRp5eUyQ" target="_blank" rel="noopener" class="platform-chip">
-                            <i data-lucide="youtube" class="w-4 h-4"></i><span>YouTube Music</span>
+                            <i data-lucide="youtube" class="w-4 h-4"></i>
+                            <span>YouTube Music</span>
                         </a>
                     </div>
 
@@ -234,35 +238,41 @@
                            :class="morePlatforms ? 'rotate-180' : ''"></i>
                     </button>
 
+                    <!-- more links -->
                     <div x-show="morePlatforms" x-collapse class="mt-6">
                         <div class="flex flex-wrap justify-center gap-3">
                             <a href="https://www.deezer.com/en/artist/60687062" target="_blank" rel="noopener" class="platform-chip">
-                                <i data-lucide="radio" class="w-4 h-4"></i><span>Deezer</span>
+                                <i data-lucide="radio" class="w-4 h-4"></i>
+                                <span>Deezer</span>
                             </a>
                             <a href="https://music.amazon.com/artists/B07P8BH48D/cup-of-joe" target="_blank" rel="noopener" class="platform-chip">
-                                <i data-lucide="headphones" class="w-4 h-4"></i><span>Amazon Music</span>
+                                <i data-lucide="headphones" class="w-4 h-4"></i>
+                                <span>Amazon Music</span>
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
 
+
         </div>
     </section>
+
 
     <!-- SHOWS -->
     <section id="shows" class="py-28 md:py-32 bg-[#FFF7ED]">
         <div class="max-w-screen-2xl mx-auto px-8">
-            <div class="grid lg:grid-cols-12 gap-10 items-start">
-
+            <div class="grid lg:grid-cols-12 gap-12 items-start">
+                
                 <div class="lg:col-span-7">
                     <p class="text-[10px] font-black tracking-[0.8em] uppercase text-[#D97706]">Shows</p>
                     <h3 class="mt-4 text-5xl md:text-6xl font-black tracking-tighter text-[#0A1128]">STARDUST TOUR</h3>
                     <p class="mt-4 text-sm text-slate-600 max-w-xl">
-                        Official dates from CNCA.
+                        Official dates from the tour poster. Venues may update — especially for TBA listings.
                     </p>
 
-                    <div class="mt-8 bg-white border border-black/5 shadow-[0_25px_70px_-45px_rgba(0,0,0,0.35)] p-7">
+                    
+                    <div class="mt-10 bg-white border border-black/5 shadow-[0_25px_70px_-45px_rgba(0,0,0,0.35)] p-7">
                         <div class="flex items-start justify-between gap-6">
                             <div>
                                 <p class="text-[9px] font-black uppercase tracking-[0.4em] text-slate-400">Next Show</p>
@@ -270,6 +280,7 @@
                                 <p class="mt-2 text-sm font-semibold text-slate-700">University of Baguio</p>
                             </div>
 
+                            
                             <div class="text-right">
                                 <p class="text-[10px] font-black uppercase tracking-[0.4em] text-[#D97706]">
                                     February 6, 2026
@@ -279,7 +290,8 @@
                         </div>
                     </div>
 
-                    <div class="mt-8 bg-white border border-black/5 shadow-[0_25px_70px_-45px_rgba(0,0,0,0.35)] overflow-hidden">
+                    <!-- Table -->
+                    <div class="mt-10 bg-white border border-black/5 shadow-[0_25px_70px_-45px_rgba(0,0,0,0.35)] overflow-hidden">
                         <div class="grid grid-cols-12 px-6 py-4 bg-[#0A1128] text-white">
                             <div class="col-span-4">
                                 <p class="text-[9px] font-black uppercase tracking-[0.4em] opacity-80">Date</p>
@@ -289,8 +301,7 @@
                             </div>
                         </div>
 
-                        <!-- slightly tighter rows -->
-                        <div class="grid grid-cols-12 px-6 py-5 border-t border-black/5">
+                        <div class="grid grid-cols-12 px-6 py-6 border-t border-black/5">
                             <div class="col-span-4">
                                 <p class="text-[10px] font-black uppercase tracking-[0.4em] text-[#D97706]">March 28, 2026</p>
                             </div>
@@ -300,7 +311,7 @@
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-12 px-6 py-5 border-t border-black/5">
+                        <div class="grid grid-cols-12 px-6 py-6 border-t border-black/5">
                             <div class="col-span-4">
                                 <p class="text-[10px] font-black uppercase tracking-[0.4em] text-[#D97706]">May 9, 2026</p>
                             </div>
@@ -310,7 +321,7 @@
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-12 px-6 py-5 border-t border-black/5">
+                        <div class="grid grid-cols-12 px-6 py-6 border-t border-black/5">
                             <div class="col-span-4">
                                 <p class="text-[10px] font-black uppercase tracking-[0.4em] text-[#D97706]">May 30, 2026</p>
                             </div>
@@ -320,7 +331,7 @@
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-12 px-6 py-5 border-t border-black/5">
+                        <div class="grid grid-cols-12 px-6 py-6 border-t border-black/5">
                             <div class="col-span-4">
                                 <p class="text-[10px] font-black uppercase tracking-[0.4em] text-[#D97706]">June 13, 2026</p>
                             </div>
@@ -336,7 +347,7 @@
                     </p>
                 </div>
 
-                <div class="lg:col-span-5 lg:pt-8">
+                <div class="lg:col-span-5 lg:pt-10">
                     <div class="bg-[#0A1128] p-4 shadow-[0_55px_140px_-70px_rgba(0,0,0,0.65)] border border-black/10">
                         <img src="~/img/stardust-tour2.jpg" asp-append-version="true"
                              alt="Stardust Tour Poster"
@@ -344,11 +355,9 @@
                              style="image-rendering:auto;" />
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
-
 
 
     <!-- CONTACT -->
@@ -657,6 +666,82 @@
                 .platform-chip:hover::after {
                     opacity: .9;
                 }
+
+        /* BAND: ANIMATED BACKGROUND */
+
+        .band-aurora {
+            background: radial-gradient(900px 420px at 20% 15%, rgba(217,119,6,0.18), transparent 60%), radial-gradient(780px 380px at 85% 25%, rgba(10,17,40,0.12), transparent 60%), radial-gradient(720px 360px at 55% 85%, rgba(217,119,6,0.10), transparent 60%), linear-gradient(180deg, rgba(253,249,243,1), rgba(253,249,243,1));
+            filter: blur(0px);
+            animation: bandAurora 14s ease-in-out infinite;
+            transform: translateZ(0);
+        }
+
+        @@keyframes bandAurora {
+            0% {
+                transform: translate3d(0,0,0) scale(1);
+                filter: blur(0px);
+            }
+
+            50% {
+                transform: translate3d(0,-10px,0) scale(1.02);
+                filter: blur(0.6px);
+            }
+
+            100% {
+                transform: translate3d(0,0,0) scale(1);
+                filter: blur(0px);
+            }
+        }
+
+        /* drifting grid */
+        .band-grid-drift {
+            background-image: linear-gradient(to right, rgba(10,17,40,0.14) 1px, transparent 1px), linear-gradient(to bottom, rgba(10,17,40,0.12) 1px, transparent 1px);
+            background-size: 84px 84px;
+            opacity: 0.05;
+            animation: gridDrift 18s linear infinite;
+            transform: translateZ(0);
+        }
+
+        @@keyframes gridDrift {
+            from {
+                background-position: 0 0, 0 0;
+            }
+
+            to {
+                background-position: 180px 120px, 180px 120px;
+            }
+        }
+
+        /* subtle diagonal light sweep */
+        .band-sweep {
+            background: linear-gradient(115deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.28) 35%, rgba(255,255,255,0) 70%);
+            opacity: 0.06;
+            transform: translateX(-60%) rotate(0.001deg);
+            animation: bandSweep 9s ease-in-out infinite;
+            mix-blend-mode: soft-light;
+            pointer-events: none;
+        }
+
+        @@keyframes bandSweep {
+            0% {
+                transform: translateX(-70%);
+            }
+
+            55% {
+                transform: translateX(10%);
+            }
+
+            100% {
+                transform: translateX(70%);
+            }
+        }
+
+        /* watermark stays subtle */
+        .band-watermark p {
+            font-size: clamp(56px, 9vw, 150px);
+            letter-spacing: -0.06em;
+            color: rgba(10,17,40,0.045);
+        }
 
     </style>
 </div>
