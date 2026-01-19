@@ -23,7 +23,7 @@ public class HomeController : Controller
                 new("Sandali", "Single", "2025", "~/img/sandali.jpg"),
                 new("Misteryoso", "Single", "2024", "~/img/misteryoso.jpg"),
                 new("Lahat Ng Bukas", "Single", "2024", "~/img/lahatngbukas.jpg")
-            }
+            },
         };
 
         return View(viewModel);

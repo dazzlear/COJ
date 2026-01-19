@@ -20,9 +20,15 @@ public class HomeController : Controller
             Discography = new List<Album>
             {
                 new("Silakbo", "Album", "2025", "~/img/silakbo.jpg"),
-                new("Sandali", "Single", "2025", "~/img/sandali.jpg"),
-                new("Misteryoso", "Single", "2024", "~/img/misteryoso.jpg"),
-                new("Lahat Ng Bukas", "Single", "2024", "~/img/lahatngbukas.jpg")
+                new("Sandali", "Single", "2025", "https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=500"),
+                new("Tingin", "Single (feat. Janine Teñoso)", "2023", "https://images.unsplash.com/photo-1514525253361-bee8718a300a?q=80&w=500"),
+                new("Mananatili", "Single", "2022", "https://images.unsplash.com/photo-1459749411177-042180ce673c?q=80&w=500")
+            },
+            UpcomingShows = new List<Show>
+            {
+                new("Oct 15, 2023", "New Frontier Theater", "Quezon City", "Sold Out"),
+                new("Oct 28, 2023", "Cebu IT Park", "Cebu City", "Tickets Available"),
+                new("Nov 12, 2023", "SMX Convention Center", "Davao", "Selling Fast")
             }
         };
 

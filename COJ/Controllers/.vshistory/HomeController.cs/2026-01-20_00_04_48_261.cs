@@ -23,6 +23,12 @@ public class HomeController : Controller
                 new("Sandali", "Single", "2025", "~/img/sandali.jpg"),
                 new("Misteryoso", "Single", "2024", "~/img/misteryoso.jpg"),
                 new("Lahat Ng Bukas", "Single", "2024", "~/img/lahatngbukas.jpg")
+            },
+            UpcomingShows = new List<Show>
+            {
+                new("Oct 15, 2023", "New Frontier Theater", "Quezon City", "Sold Out"),
+                new("Oct 28, 2023", "Cebu IT Park", "Cebu City", "Tickets Available"),
+                new("Nov 12, 2023", "SMX Convention Center", "Davao", "Selling Fast")
             }
         };
 
